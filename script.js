@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
 
         const loaderText = document.createElement('div');
-        loaderText.textContent = 'Jardim Paisagismo';
+        loaderText.textContent = 'Jardin Paisagismo';
         loaderText.style.cssText = `
             color: white;
             font-family: 'Playfair Display', serif;
