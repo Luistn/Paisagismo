@@ -30,6 +30,12 @@
     --shadow-heavy: 0 12px 40px rgba(0, 56, 23, 0.2);
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 body {
     font-family: var(--font-secondary);
     line-height: 1.6;
@@ -39,6 +45,7 @@ body {
 
 .container {
     max-width: 1200px;
+    width: 90%;
     margin: 0 auto;
     padding: var(--container-padding);
 }
@@ -63,8 +70,47 @@ body {
     justify-content: space-between;
     align-items: center;
     max-width: 1200px;
+    width: 90%;
     margin: 0 auto;
     padding: var(--container-padding);
+}
+
+.mobile-menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    color: var(--gold);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1001;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 250px;
+        height: 100vh;
+        background: var(--primary-green);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 25px;
+        transition: right 0.3s ease;
+        z-index: 1000;
+        padding: 20px;
+        border-left: 1px solid var(--gold);
+    }
+    
+    .nav-menu.active {
+        right: 0;
+    }
 }
 
 .logo h1 {
@@ -142,8 +188,15 @@ body {
     gap: 60px;
     align-items: center;
     max-width: 1200px;
+    width: 90%;
     margin: 0 auto;
     padding: var(--container-padding);
+}
+
+@media (max-width: 768px) {
+    .hero-content {
+        gap: 40px;
+    }
 }
 
 .hero-text h2 {
@@ -638,6 +691,25 @@ body {
 }
 
 /* Responsive Design */
+@media (max-width: 992px) {
+    .container {
+        max-width: 90%;
+    }
+    
+    .hero-text h2 {
+        font-size: 3rem;
+    }
+    
+    .sobre-text h3, 
+    .tipos h3, 
+    .projetos h3,
+    .clientes h3,
+    .galeria h3,
+    .contato-info h3 {
+        font-size: 2.2rem;
+    }
+}
+
 @media (max-width: 768px) {
     .hero-content,
     .sobre-content,
@@ -650,6 +722,10 @@ body {
         font-size: 2.5rem;
     }
     
+    .hero {
+        padding: 100px 0 60px;
+    }
+    
     .nav-menu {
         display: none;
     }
@@ -657,6 +733,13 @@ body {
     .tipos-grid,
     .projetos-grid {
         grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .tipo-card,
+    .projeto-card {
+        max-width: 450px;
+        margin: 0 auto;
     }
     
     .clientes-grid {
@@ -681,11 +764,62 @@ body {
         flex-direction: column;
         text-align: center;
     }
+    
+    .section-padding {
+        padding: 60px 0;
+    }
 }
 
 @media (max-width: 480px) {
+    .hero {
+        padding: 90px 0 50px;
+        min-height: auto;
+    }
+    
     .hero-text h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+    
+    .hero-text p {
+        font-size: 1rem;
+        margin-bottom: 25px;
+    }
+    
+    .cta-button {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+    }
+    
+    .sobre-text h3, 
+    .tipos h3, 
+    .projetos h3,
+    .clientes h3,
+    .galeria h3,
+    .contato-info h3 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+    
+    .sobre-text p,
+    .tipo-card p,
+    .projeto-info p,
+    .contato-info p {
+        font-size: 0.95rem;
+    }
+    
+    .tipo-card h4,
+    .projeto-info h4 {
+        font-size: 1.3rem;
+    }
+    
+    .tipo-card img,
+    .projeto-card img {
+        height: 200px;
+    }
+    
+    .sobre-image img {
+        height: 250px;
     }
     
     .clientes-intro {
@@ -711,10 +845,76 @@ body {
     
     .galeria-grid {
         grid-template-columns: 1fr;
+        gap: 15px;
     }
     
     .container {
         padding: 0 15px;
+    }
+    
+    .section-padding {
+        padding: 40px 0;
+    }
+    
+    .logo h1 {
+        font-size: 1.8rem;
+    }
+    
+    .logo span {
+        font-size: 0.8rem;
+    }
+    
+    .footer-logo h1 {
+        font-size: 1.6rem;
+    }
+    
+    .footer-logo span {
+        font-size: 0.7rem;
+    }
+    
+    .contato-info h4 {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .hero-text h2 {
+        font-size: 1.6rem;
+    }
+    
+    .hero-text p {
+        font-size: 0.9rem;
+    }
+    
+    .sobre-text h3, 
+    .tipos h3, 
+    .projetos h3,
+    .clientes h3,
+    .galeria h3,
+    .contato-info h3 {
+        font-size: 1.6rem;
+    }
+    
+    .tipo-card img,
+    .projeto-card img,
+    .sobre-image img {
+        height: 180px;
+    }
+    
+    .contato-details p {
+        font-size: 0.9rem;
+    }
+    
+    .header {
+        padding: 10px 0;
+    }
+    
+    .logo h1 {
+        font-size: 1.6rem;
+    }
+    
+    .logo span {
+        font-size: 0.7rem;
     }
 }
 
