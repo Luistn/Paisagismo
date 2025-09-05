@@ -365,10 +365,72 @@ body {
     opacity: 0.9;
 }
 
+/* Clientes Section */
+.clientes {
+    padding: var(--section-padding);
+    background: var(--accent-green);
+}
+
+.clientes h3 {
+    font-family: var(--font-primary);
+    font-size: 2.5rem;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.clientes-intro {
+    text-align: center;
+    color: var(--white);
+    font-size: 1.1rem;
+    margin-bottom: 60px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.clientes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.cliente-logo {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cliente-logo:hover {
+    transform: translateY(-5px);
+    background: rgba(176, 135, 102, 0.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    border-color: var(--gold);
+}
+
+.cliente-logo img {
+    max-width: 100%;
+    max-height: 80px;
+    filter: grayscale(1) brightness(2);
+    transition: all 0.3s ease;
+}
+
+.cliente-logo:hover img {
+    filter: grayscale(0) brightness(1);
+}
+
 /* Galeria Section */
 .galeria {
     padding: var(--section-padding);
-    background: var(--accent-green);
+    background: var(--primary-green);
 }
 
 .galeria h3 {
@@ -577,6 +639,10 @@ body {
         grid-template-columns: 1fr;
     }
     
+    .clientes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
     .galeria-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -590,6 +656,10 @@ body {
 @media (max-width: 480px) {
     .hero-text h2 {
         font-size: 2rem;
+    }
+    
+    .clientes-grid {
+        grid-template-columns: 1fr;
     }
     
     .galeria-grid {
