@@ -373,6 +373,7 @@ document.addEventListener('DOMContentLoaded', function() {
             height: 100%;
             background: #003817;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 10000;
@@ -387,18 +388,203 @@ document.addEventListener('DOMContentLoaded', function() {
             font-size: 2rem;
             font-weight: 700;
             animation: pulse 1.5s ease-in-out infinite;
+            margin-bottom: 30px;
         `;
 
+        // Container para a animação das plantas
+        const gardenContainer = document.createElement('div');
+        gardenContainer.style.cssText = `
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            width: 240px;
+            height: 120px;
+            position: relative;
+        `;
+
+        // Criar várias plantas/flores com diferentes animações
+        const plantCount = 5;
+        for (let i = 0; i < plantCount; i++) {
+            // Definir que tipo de planta será (flor, folha, árvore pequena)
+            const plantType = Math.floor(Math.random() * 3);
+            
+            const plant = document.createElement('div');
+            plant.style.position = 'absolute';
+            plant.style.bottom = '0';
+            plant.style.left = `${20 + (i * 50)}px`;
+            
+            // Altura inicial (começará pequeno)
+            const initialHeight = 0;
+            const maxHeight = 60 + Math.random() * 40; // Entre 60px e 100px
+            
+            // Atraso para cada planta começar a crescer em momentos diferentes
+            const delay = i * 200;
+            
+            // Diferentes tipos de plantas baseado no plantType
+            if (plantType === 0) {
+                // Flor
+                const stem = document.createElement('div');
+                stem.style.cssText = `
+                    width: 3px;
+                    height: ${initialHeight}px;
+                    background: #006629;
+                    margin: 0 auto;
+                    transition: height 1.5s ease;
+                    transition-delay: ${delay}ms;
+                `;
+                
+                const flower = document.createElement('div');
+                flower.style.cssText = `
+                    width: 20px;
+                    height: 20px;
+                    background: #e8917c;
+                    border-radius: 50%;
+                    position: relative;
+                    left: -8.5px;
+                    top: -10px;
+                    transform: scale(0);
+                    transition: transform 0.8s ease;
+                    transition-delay: ${delay + 1000}ms;
+                `;
+                
+                // Pétalas da flor
+                for (let p = 0; p < 5; p++) {
+                    const petal = document.createElement('div');
+                    petal.style.cssText = `
+                        width: 15px;
+                        height: 15px;
+                        background: #ff6b6b;
+                        border-radius: 50%;
+                        position: absolute;
+                        top: ${Math.sin((p / 5) * Math.PI * 2) * 10}px;
+                        left: ${Math.cos((p / 5) * Math.PI * 2) * 10}px;
+                        transform: scale(0);
+                        transition: transform 0.5s ease;
+                        transition-delay: ${delay + 1200 + (p * 100)}ms;
+                    `;
+                    flower.appendChild(petal);
+                }
+                
+                plant.appendChild(stem);
+                plant.appendChild(flower);
+                
+                // Iniciar a animação após um breve atraso
+                setTimeout(() => {
+                    stem.style.height = `${maxHeight}px`;
+                    setTimeout(() => {
+                        flower.style.transform = 'scale(1)';
+                        Array.from(flower.children).forEach(petal => {
+                            petal.style.transform = 'scale(1)';
+                        });
+                    }, 1000);
+                }, delay);
+                
+            } else if (plantType === 1) {
+                // Folha/planta
+                const stem = document.createElement('div');
+                stem.style.cssText = `
+                    width: 3px;
+                    height: ${initialHeight}px;
+                    background: #006629;
+                    margin: 0 auto;
+                    transition: height 1.5s ease;
+                    transition-delay: ${delay}ms;
+                `;
+                
+                const leafCount = 3 + Math.floor(Math.random() * 3);
+                const leaves = [];
+                
+                for (let l = 0; l < leafCount; l++) {
+                    const leaf = document.createElement('div');
+                    const side = l % 2 === 0 ? -1 : 1;
+                    const leafDelay = delay + 800 + (l * 200);
+                    
+                    leaf.style.cssText = `
+                        width: 15px;
+                        height: 8px;
+                        background: #4caf50;
+                        position: absolute;
+                        top: ${maxHeight - 10 - (l * (maxHeight / (leafCount + 1)))}px;
+                        left: ${side * 7}px;
+                        border-radius: 50%;
+                        transform: rotate(${side * 30}deg) scale(0);
+                        transform-origin: ${side === -1 ? 'right' : 'left'} center;
+                        transition: transform 0.6s ease;
+                        transition-delay: ${leafDelay}ms;
+                    `;
+                    
+                    leaves.push(leaf);
+                    plant.appendChild(leaf);
+                }
+                
+                plant.appendChild(stem);
+                
+                // Iniciar a animação após um breve atraso
+                setTimeout(() => {
+                    stem.style.height = `${maxHeight}px`;
+                    leaves.forEach((leaf, index) => {
+                        setTimeout(() => {
+                            leaf.style.transform = `rotate(${leaf.style.transform.split('rotate(')[1].split('deg')[0]}deg) scale(1)`;
+                        }, 800 + (index * 200));
+                    });
+                }, delay);
+                
+            } else {
+                // Árvore pequena
+                const stem = document.createElement('div');
+                stem.style.cssText = `
+                    width: 5px;
+                    height: ${initialHeight}px;
+                    background: #795548;
+                    margin: 0 auto;
+                    transition: height 1.5s ease;
+                    transition-delay: ${delay}ms;
+                `;
+                
+                const crown = document.createElement('div');
+                crown.style.cssText = `
+                    width: 30px;
+                    height: 30px;
+                    background: #33691e;
+                    border-radius: 50%;
+                    position: relative;
+                    left: -12.5px;
+                    top: -15px;
+                    transform: scale(0);
+                    transition: transform 0.8s ease;
+                    transition-delay: ${delay + 1000}ms;
+                `;
+                
+                plant.appendChild(stem);
+                plant.appendChild(crown);
+                
+                // Iniciar a animação após um breve atraso
+                setTimeout(() => {
+                    stem.style.height = `${maxHeight}px`;
+                    setTimeout(() => {
+                        crown.style.transform = 'scale(1)';
+                    }, 1000);
+                }, delay);
+            }
+            
+            gardenContainer.appendChild(plant);
+        }
+        
         const pulseStyle = document.createElement('style');
         pulseStyle.textContent = `
             @keyframes pulse {
                 0%, 100% { opacity: 1; transform: scale(1); }
                 50% { opacity: 0.7; transform: scale(1.05); }
             }
+            @keyframes sway {
+                0%, 100% { transform: rotate(-3deg); }
+                50% { transform: rotate(3deg); }
+            }
         `;
         document.head.appendChild(pulseStyle);
 
         loader.appendChild(loaderText);
+        loader.appendChild(gardenContainer);
         document.body.appendChild(loader);
 
         setTimeout(() => {
@@ -406,7 +592,7 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 document.body.removeChild(loader);
             }, 500);
-        }, 2000);
+        }, 5500); // Aumentado para dar mais tempo para visualizar as animações de plantas
     });
 
     // Mouse cursor trail effect
