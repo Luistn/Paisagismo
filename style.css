@@ -711,6 +711,34 @@ body {
     color: var(--gold);
 }
 
+/* Footer Copyright */
+.footer-copyright {
+    margin-top: 30px;
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+}
+
+.footer-copyright p {
+    font-size: 0.9rem;
+    color: var(--white);
+    opacity: 0.8;
+    margin-bottom: 5px;
+}
+
+.dev-credit {
+    color: var(--gold);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.dev-credit:hover {
+    color: #c59877;
+    text-decoration: underline;
+}
+
 /* Responsive Design */
 @media (max-width: 992px) {
     .container {
