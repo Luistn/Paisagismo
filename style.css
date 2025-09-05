@@ -94,22 +94,25 @@ body {
     .nav-menu {
         position: fixed;
         top: 0;
-        right: -100%;
-        width: 250px;
-        height: 100vh;
-        background: var(--primary-green);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 25px;
-        transition: right 0.3s ease;
-        z-index: 1000;
-        padding: 20px;
-        border-left: 1px solid var(--gold);
+    right: -260px; /* hide off-screen (width + margin) */
+    width: 260px;
+    height: 100vh;
+    background: var(--primary-green);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    transition: right 0.28s ease, transform 0.28s ease;
+    z-index: 9999; /* above header */
+    padding: 20px;
+    border-left: 1px solid var(--gold);
+    box-shadow: -12px 0 30px rgba(0,0,0,0.25);
+    overflow-y: auto;
     }
     
     .nav-menu.active {
-        right: 0;
+    right: 0 !important;
+    transform: translateX(0);
     }
 }
 
@@ -412,6 +415,14 @@ body {
     font-weight: 600;
 }
 
+.subtle-italic {
+    font-style: italic;
+    color: rgba(255,255,255,0.9);
+    font-size: 0.95rem;
+    margin-top: -6px;
+    margin-bottom: 12px;
+}
+
 .projeto-info p {
     color: var(--white);
     line-height: 1.6;
@@ -470,20 +481,19 @@ body {
 .cliente-logo {
     background: rgba(0, 0, 0, 0.1);
     border-radius: var(--border-radius);
-    padding: 20px;
+    padding: 0px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    height: 120px;
+    height: 100px;
 }
 
 .cliente-logo:hover {
     transform: translateY(-5px);
-    background: rgba(176, 135, 102, 0.1);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-    border-color: var(--gold);
+    /* manter elevação suave, remover alteração de cor */
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
 }
 
 .cliente-logo img {
@@ -492,13 +502,12 @@ body {
     width: auto;
     height: auto;
     object-fit: contain;
-    filter: grayscale(1) brightness(2);
-    transition: all 0.3s ease;
+    /* mostrar cores originais da logo */
+    filter: none;
+    transition: transform 0.25s ease, filter 0.25s ease;
 }
 
-.cliente-logo:hover img {
-    filter: grayscale(0) brightness(1);
-}
+/* sem mudanças de cor no hover para preservar identidade das marcas */
 
 /* Galeria Section */
 .galeria {

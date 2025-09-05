@@ -6,9 +6,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const navMenu = document.querySelector('.nav-menu');
     
     if(mobileMenuToggle && navMenu) {
-        mobileMenuToggle.addEventListener('click', function() {
+        mobileMenuToggle.addEventListener('click', function(event) {
+            event.stopPropagation(); // prevent document click
+            const opening = !navMenu.classList.contains('active');
             navMenu.classList.toggle('active');
             mobileMenuToggle.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+            if (opening) {
+                // focus first link for accessibility
+                const firstLink = navMenu.querySelector('a');
+                if (firstLink) firstLink.focus();
+            }
         });
         
         // Close mobile menu when clicking on a link
@@ -20,8 +27,9 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
-        // Close mobile menu when clicking outside
+        // Close mobile menu when clicking outside (only when active)
         document.addEventListener('click', function(event) {
+            if (!navMenu.classList.contains('active')) return;
             if (!navMenu.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
                 navMenu.classList.remove('active');
                 mobileMenuToggle.textContent = '☰';
