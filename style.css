@@ -699,6 +699,18 @@ body {
     transform: translateY(-2px);
 }
 
+/* SVG social icons */
+.footer-social a svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+    color: var(--white);
+}
+
+.footer-social a:hover svg {
+    color: var(--gold);
+}
+
 /* Responsive Design */
 @media (max-width: 992px) {
     .container {
@@ -735,9 +747,7 @@ body {
         padding: 100px 0 60px;
     }
     
-    .nav-menu {
-        display: none;
-    }
+    /* nav-menu handled via fixed panel defined earlier; do not hide here */
     
     .tipos-grid,
     .projetos-grid {

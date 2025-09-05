@@ -382,7 +382,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const loaderText = document.createElement('div');
         loaderText.textContent = 'Jardin Paisagismo';
         loaderText.style.cssText = `
-            color: white;
+            color: #b08766;
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
             font-weight: 700;
