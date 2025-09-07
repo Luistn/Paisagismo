@@ -19,14 +19,43 @@
                 <h1>Jardin</h1>
                 <span>PAISAGISMO</span>
             </div>
+            <!-- Language selector -->
+            <div class="lang-switcher" aria-label="Selecionar idioma">
+                <button class="lang-btn" data-lang="pt-BR" aria-label="Português">
+                    <!-- Brazil flag -->
+                    <svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <rect width="20" height="14" fill="#009C3B" />
+                        <polygon points="10,1 18,7 10,13 2,7" fill="#FFDF00" />
+                        <circle cx="10" cy="7" r="3" fill="#002776" />
+                    </svg>
+                </button>
+                <button class="lang-btn" data-lang="en" aria-label="English">
+                    <!-- USA flag simplified -->
+                    <svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <rect width="20" height="14" fill="#B22234" />
+                        <rect width="20" height="1.555" y="1.555" fill="#fff" />
+                        <rect width="20" height="1.555" y="4.665" fill="#fff" />
+                        <rect width="20" height="1.555" y="7.775" fill="#fff" />
+                        <rect width="20" height="1.555" y="10.885" fill="#fff" />
+                        <rect width="7.5" height="6.5" fill="#3C3B6E" />
+                    </svg>
+                </button>
+                <button class="lang-btn" data-lang="es" aria-label="Español">
+                    <!-- Spain flag simplified -->
+                    <svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <rect width="20" height="14" fill="#AA151B" />
+                        <rect width="20" height="4" y="5" fill="#F1BF00" />
+                    </svg>
+                </button>
+            </div>
             <button class="mobile-menu-toggle">☰</button>
             <ul class="nav-menu">
-                <li><a href="#home">Home</a></li>
+                <li><a href="#home" data-i18n="nav.home">Home</a></li>
                 <!-- <li><a href="#sobre">Sobre</a></li> -->
-                <li><a href="#tipos">Tipos</a></li>
-                <li><a href="#projetos">Projetos</a></li>
-                <li><a href="#clientes">Clientes</a></li>
-                <li><a href="#contato">Contato</a></li>
+                <li><a href="#tipos" data-i18n="nav.types">Tipos</a></li>
+                <li><a href="#projetos" data-i18n="nav.projects">Projetos</a></li>
+                <li><a href="#clientes" data-i18n="nav.clients">Clientes</a></li>
+                <li><a href="#contato" data-i18n="nav.contact">Contato</a></li>
             </ul>
         </nav>
     </header>
@@ -35,12 +64,12 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <div class="hero-text">
-                <h2><span class="no-break">Paisagismo moderno,</span><span class="second-line">do seu jeito.</span></h2>
-                <p>Especializados em paisagismo (<b><i>natural, permanente e preservado</i></b>), garantimos ambientes verdes e
+                <h2><span class="no-break" data-i18n="hero.line1">Paisagismo moderno,</span><span class="second-line" data-i18n="hero.line2">do seu jeito.</span></h2>
+                <p data-i18n="hero.lead">Especializados em paisagismo (<b><i>natural, permanente e preservado</i></b>), garantimos ambientes verdes e
                     elegantes o ano todo, sem a necessidade de manutenções constantes.
                     Nosso compromisso é proporcionar uma experiência de <b><i>bem-estar</b></i>, que se mantém <b><i>impecável em todas as
                     estações</b></i>.</p>
-                <a class="cta-button" href="https://wa.me/5521979063205">FAÇA UM ORÇAMENTO</a>
+                <a class="cta-button" href="https://wa.me/5521979063205" data-i18n="cta.quote">FAÇA UM ORÇAMENTO</a>
             </div>
             <div class="hero-image">
                 <img src="images/modern_landscaping_1.jpg" alt="Paisagismo moderno">
@@ -68,28 +97,23 @@
 
     <!-- Tipos de Paisagismo Section -->
     <section id="tipos" class="tipos">
-        <div class="container">
-            <h3>TIPOS DE PAISAGISMO</h3>
+    <div class="container">
+        <h3 data-i18n="types.title">TIPOS DE PAISAGISMO</h3>
             <div class="tipos-grid">
                 <div class="tipo-card">
                     <img src="images/modern_landscaping_3.jpg" alt="Natural">
-                    <h4>NATURAL</h4>
-                    <p>Em vasos, jardineiras, plantados direto em solo ou painéis verticais. O que for melhor para o seu
-                        ambiente e de acordo com a entrada de luz natural. Com irrigação automática.</p>
+            <h4 data-i18n="types.card1.title">NATURAL</h4>
+            <p data-i18n="types.card1.desc">Em vasos, jardineiras, plantados direto em solo ou painéis verticais. O que for melhor para o seu ambiente e de acordo com a entrada de luz natural. Com irrigação automática.</p>
                 </div>
                 <div class="tipo-card">
                     <img src="images/luxury_garden_1.jpg" alt="Harmônico">
-                    <h4>PERMANENTE </h4>
-                    <p>Perfeito para ambientes que não recebem luz natural. Nesses casos são plantas artificiais
-                        idênticas às reais, gerando dúvida em muitas das vezes. Confundindo o olhar de quem admira e se
-                        beneficia com o bem-estar. Não precisam de manutenção.</p>
+            <h4 data-i18n="types.card2.title">PERMANENTE</h4>
+            <p data-i18n="types.card2.desc">Perfeito para ambientes que não recebem luz natural. Nesses casos são plantas artificiais idênticas às reais, gerando dúvida em muitas das vezes. Confundindo o olhar de quem admira e se beneficia com o bem-estar. Não precisam de manutenção.</p>
                 </div>
                 <div class="tipo-card">
                     <img src="images/luxury_garden_2.jpg" alt="Preservado">
-                    <h4>PRESERVADO</h4>
-                    <p>São plantas naturais, porém secas. Passam por um minucioso processo. Muito utilizado para quem
-                        não quer manutenção mas também não quer utilizar plástico em seu projeto. Seguindo assim uma
-                        pegada ecológica.</p>
+            <h4 data-i18n="types.card3.title">PRESERVADO</h4>
+            <p data-i18n="types.card3.desc">São plantas naturais, porém secas. Passam por um minucioso processo. Muito utilizado para quem não quer manutenção mas também não quer utilizar plástico em seu projeto. Seguindo assim uma pegada ecológica.</p>
                 </div>
             </div>
         </div>
@@ -98,53 +122,38 @@
     <!-- Nossos Projetos Section -->
     <section id="projetos" class="projetos">
         <div class="container">
-            <h3>NOSSOS PROJETOS</h3>
+            <h3 data-i18n="projects.title">NOSSOS PROJETOS</h3>
             <div class="projetos-grid">
                 <div class="projeto-card">
                     <img src="images/modern_landscaping_1.jpg" alt="Projeto 1">
                     <div class="projeto-info">
-                        <h4>PRIO</h4>
-                        <p class="subtle-italic">(Paisagismo permanente)</p>
-                        <p>Desenvolvemos para a PRIO um paisagismo permanente que integra natureza do fundo do mar e
-                            arquitetura de forma harmoniosa, criando ambientes acolhedores, inspiradores e inusitados. O
-                            novo paisagismo valoriza áreas comuns e espaços de convivência, promovendo bem-estar,
-                            conforto e uma experiência sensorial única para os colaboradores. Devido ao sucesso, já
-                            passamos de 10 projetos com o mesmo cliente, que replica a identidade criada em todos os
-                            seus escritórios e feiras.</p>
+                        <h4 data-i18n="projects.card1.title">PRIO</h4>
+                        <p class="subtle-italic" data-i18n="projects.card1.tag">(Paisagismo permanente)</p>
+                        <p data-i18n="projects.card1.desc">Desenvolvemos para a PRIO um paisagismo permanente que integra natureza do fundo do mar e arquitetura de forma harmoniosa, criando ambientes acolhedores, inspiradores e inusitados. O novo paisagismo valoriza áreas comuns e espaços de convivência, promovendo bem-estar, conforto e uma experiência sensorial única para os colaboradores. Devido ao sucesso, já passamos de 10 projetos com o mesmo cliente, que replica a identidade criada em todos os seus escritórios e feiras.</p>
                     </div>
                 </div>
                 <div class="projeto-card">
                     <img src="images/luxury_garden_1.jpg" alt="Projeto 2">
                     <div class="projeto-info">
-                        <h4>CRISTO REDENTOR</h4>
-                        <p class="subtle-italic">(Paisagismo permanente)</p>
-                        <p>Em parceria com o Grupo Coca-Cola, desenvolvemos o projeto de paisagismo para o Cristo
-                            Redentor, um dos principais cartões-postais do mundo e símbolo do Rio de Janeiro. O trabalho
-                            foi pensado para replicar a vegetação local, onde recebemos uma lista com todas as espécies
-                            nativas. A presença do paisagismo contribui para um ambiente mais harmonioso e convidativo,
-                            gerando muitas mídias para os turistas</p>
+                        <h4 data-i18n="projects.card2.title">CRISTO REDENTOR</h4>
+                        <p class="subtle-italic" data-i18n="projects.card2.tag">(Paisagismo permanente)</p>
+                        <p data-i18n="projects.card2.desc">Em parceria com o Grupo Coca-Cola, desenvolvemos o projeto de paisagismo para o Cristo Redentor, um dos principais cartões-postais do mundo e símbolo do Rio de Janeiro. O trabalho foi pensado para replicar a vegetação local, onde recebemos uma lista com todas as espécies nativas. A presença do paisagismo contribui para um ambiente mais harmonioso e convidativo, gerando muitas mídias para os turistas.</p>
                     </div>
                 </div>
                 <div class="projeto-card">
                     <img src="images/modern_landscaping_3.jpg" alt="Projeto 3">
                     <div class="projeto-info">
-                        <h4>BAT</h4>
-                        <p class="subtle-italic">(Paisagismo natural e preservado)</p>
-                        <p>Este projeto corporativo combina minimalismo e aconchego. São 5 andares para a mesma empresa,
-                            onde temos jardim vertical natural com irrigação automática na área externa, muitas plantas
-                            naturais em vaso, árvores e aéreos preservados para compor todos os andares. O bem-estar é
-                            prioridade ali.</p>
+                        <h4 data-i18n="projects.card3.title">BAT</h4>
+                        <p class="subtle-italic" data-i18n="projects.card3.tag">(Paisagismo natural e preservado)</p>
+                        <p data-i18n="projects.card3.desc">Este projeto corporativo combina minimalismo e aconchego. São 5 andares para a mesma empresa, onde temos jardim vertical natural com irrigação automática na área externa, muitas plantas naturais em vaso, árvores e aéreos preservados para compor todos os andares. O bem-estar é prioridade ali.</p>
                     </div>
                 </div>
                 <div class="projeto-card">
                     <img src="images/luxury_garden_2.jpg" alt="Projeto 4">
                     <div class="projeto-info">
-                        <h4>MDS</h4>
-                        <p class="subtle-italic">(Paisagismo natural, permanente e preservado)</p>
-                        <p>Foram 2 andares para a sede no Rio. Com as malas prontas para as suas filiais em São Paulo e
-                            Salvador. Vamos seguir com a mesma identidade onde intercalamos as plantas naturais em vaso,
-                            preservados em árvores e jardineiras e aéreos com as plantas permanentes. Esse foi o mix
-                            escolhido pelas arquitetas que assinaram esse projeto.</p>
+                        <h4 data-i18n="projects.card4.title">MDS</h4>
+                        <p class="subtle-italic" data-i18n="projects.card4.tag">(Paisagismo natural, permanente e preservado)</p>
+                        <p data-i18n="projects.card4.desc">Foram 2 andares para a sede no Rio. Com as malas prontas para as suas filiais em São Paulo e Salvador. Vamos seguir com a mesma identidade onde intercalamos as plantas naturais em vaso, preservados em árvores e jardineiras e aéreos com as plantas permanentes. Esse foi o mix escolhido pelas arquitetas que assinaram esse projeto.</p>
                     </div>
                 </div>
             </div>
@@ -154,7 +163,7 @@
     <!-- Clientes Section -->
     <section id="clientes" class="clientes">
         <div class="container">
-            <h3>NOSSOS CLIENTES</h3>
+            <h3 data-i18n="clients.title">NOSSOS CLIENTES</h3>
             <div class="clientes-grid">
                 <div class="cliente-logo">
                     <img src="images/logo/logo-1.png" alt="Cliente 1">
@@ -219,8 +228,8 @@
         <div class="container">
             <div class="contato-content">
                 <div class="contato-info">
-                    <h3>Entre em contato</h3>
-                    <h4>Crie conosco a sua mudança!</h4>
+                            <h3 data-i18n="contact.title">Entre em contato</h3>
+                            <h4 data-i18n="contact.subtitle">Crie conosco a sua mudança!</h4>
                     <p>Estamos prontos para transformar seus sonhos em realidade. Entre em contato e vamos conversar
                         sobre seu projeto.</p>
                     <div class="contato-details">
@@ -259,7 +268,7 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-copyright">
-                <p>&copy; 2025 Jardin Paisagismo. Todos os direitos reservados.</p>
+                <p data-i18n="footer.copyright">&copy; 2025 Jardin Paisagismo. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>

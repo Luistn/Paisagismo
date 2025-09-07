@@ -273,6 +273,161 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Loader, flower animations and cursor trail intentionally removed.
     // This keeps the page static on load and avoids visual distractions.
+    // --- I18n: language selector ---
+    const translations = {
+        'pt-BR': {
+            'nav.home': 'Home',
+            'nav.types': 'Tipos',
+            'nav.projects': 'Projetos',
+            'nav.clients': 'Clientes',
+            'nav.contact': 'Contato',
+            'hero.line1': 'Paisagismo moderno,',
+            'hero.line2': 'do seu jeito.',
+            'hero.lead': 'Especializados em paisagismo (natural, permanente e preservado), garantimos ambientes verdes e elegantes o ano todo, sem a necessidade de manutenções constantes. Nosso compromisso é proporcionar uma experiência de bem-estar, que se mantém impecável em todas as estações.',
+            'cta.quote': 'FAÇA UM ORÇAMENTO',
+            'contact.title': 'Entre em contato',
+            'contact.subtitle': 'Crie conosco a sua mudança!',
+            'footer.copyright': '© 2025 Jardin Paisagismo. Todos os direitos reservados.'
+            ,
+            /* types */
+            'types.title': 'TIPOS DE PAISAGISMO',
+            'types.card1.title': 'NATURAL',
+            'types.card1.desc': 'Em vasos, jardineiras, plantados direto em solo ou painéis verticais. O que for melhor para o seu ambiente e de acordo com a entrada de luz natural. Com irrigação automática.',
+            'types.card2.title': 'PERMANENTE',
+            'types.card2.desc': 'Perfeito para ambientes que não recebem luz natural. Nesses casos são plantas artificiais idênticas às reais, gerando dúvida em muitas das vezes. Confundindo o olhar de quem admira e se beneficia com o bem-estar. Não precisam de manutenção.',
+            'types.card3.title': 'PRESERVADO',
+            'types.card3.desc': 'São plantas naturais, porém secas. Passam por um minucioso processo. Muito utilizado para quem não quer manutenção mas também não quer utilizar plástico em seu projeto. Seguindo assim uma pegada ecológica.',
+            /* projects */
+            'projects.title': 'NOSSOS PROJETOS',
+            'projects.card1.title': 'PRIO',
+            'projects.card1.tag': '(Paisagismo permanente)',
+            'projects.card1.desc': 'Desenvolvemos para a PRIO um paisagismo permanente que integra natureza do fundo do mar e arquitetura de forma harmoniosa, criando ambientes acolhedores, inspiradores e inusitados. O novo paisagismo valoriza áreas comuns e espaços de convivência, promovendo bem-estar, conforto e uma experiência sensorial única para os colaboradores. Devido ao sucesso, já passamos de 10 projetos com o mesmo cliente, que replica a identidade criada em todos os seus escritórios e feiras.',
+            'projects.card2.title': 'CRISTO REDENTOR',
+            'projects.card2.tag': '(Paisagismo permanente)',
+            'projects.card2.desc': 'Em parceria com o Grupo Coca-Cola, desenvolvemos o projeto de paisagismo para o Cristo Redentor, um dos principais cartões-postais do mundo e símbolo do Rio de Janeiro. O trabalho foi pensado para replicar a vegetação local, onde recebemos uma lista com todas as espécies nativas. A presença do paisagismo contribui para um ambiente mais harmonioso e convidativo, gerando muitas mídias para os turistas.',
+            'projects.card3.title': 'BAT',
+            'projects.card3.tag': '(Paisagismo natural e preservado)',
+            'projects.card3.desc': 'Este projeto corporativo combina minimalismo e aconchego. São 5 andares para a mesma empresa, onde temos jardim vertical natural com irrigação automática na área externa, muitas plantas naturais em vaso, árvores e aéreos preservados para compor todos os andares. O bem-estar é prioridade ali.',
+            'projects.card4.title': 'MDS',
+            'projects.card4.tag': '(Paisagismo natural, permanente e preservado)',
+            'projects.card4.desc': 'Foram 2 andares para a sede no Rio. Com as malas prontas para as suas filiais em São Paulo e Salvador. Vamos seguir com a mesma identidade onde intercalamos as plantas naturais em vaso, preservados em árvores e jardineiras e aéreos com as plantas permanentes. Esse foi o mix escolhido pelas arquitetas que assinaram esse projeto.',
+            /* clients */
+            'clients.title': 'NOSSOS CLIENTES'
+        },
+        'en': {
+            'nav.home': 'Home',
+            'nav.types': 'Types',
+            'nav.projects': 'Projects',
+            'nav.clients': 'Clients',
+            'nav.contact': 'Contact',
+            'hero.line1': 'Modern landscaping,',
+            'hero.line2': 'your way.',
+            'hero.lead': 'Specialized in landscaping (natural, permanent and preserved), we ensure green and elegant environments all year round, without the need for constant maintenance. Our commitment is to provide a wellness experience that remains impeccable in every season.',
+            'cta.quote': 'GET A QUOTE',
+            'contact.title': 'Get in touch',
+            'contact.subtitle': 'Create your change with us!',
+            'footer.copyright': '© 2025 Jardin Paisagismo. All rights reserved.'
+            ,
+            /* types */
+            'types.title': 'TYPES OF LANDSCAPING',
+            'types.card1.title': 'NATURAL',
+            'types.card1.desc': 'In pots, planters, planted directly in the ground or vertical panels. Whatever works best for your environment and natural light entry. With automatic irrigation.',
+            'types.card2.title': 'PERMANENT',
+            'types.card2.desc': 'Perfect for spaces that do not receive natural light. In those cases artificial plants identical to real ones are used, often confusing the viewer. They require no maintenance.',
+            'types.card3.title': 'PRESERVED',
+            'types.card3.desc': 'Natural plants that are preserved and dried. They undergo a meticulous process. Often chosen by those who want minimal maintenance but avoid plastic alternatives.',
+            /* projects */
+            'projects.title': 'OUR PROJECTS',
+            'projects.card1.title': 'PRIO',
+            'projects.card1.tag': '(Permanent landscaping)',
+            'projects.card1.desc': 'We developed for PRIO a permanent landscaping that integrates marine nature and architecture harmoniously, creating welcoming, inspiring and unexpected environments. The new landscaping values common areas and social spaces, promoting well-being, comfort and a unique sensory experience for employees. Due to its success, we have already completed more than 10 projects with the same client, who replicates the created identity in all its offices and fairs.',
+            'projects.card2.title': 'CRISTO REDENTOR',
+            'projects.card2.tag': '(Permanent landscaping)',
+            'projects.card2.desc': 'In partnership with the Coca-Cola Group, we developed the landscaping project for Christ the Redeemer, one of the main landmarks of the world and a symbol of Rio de Janeiro. The work was designed to replicate the local vegetation, for which we received a list of all native species. The presence of landscaping helps create a more harmonious and welcoming environment, generating lots of media for tourists.',
+            'projects.card3.title': 'BAT',
+            'projects.card3.tag': '(Natural and preserved landscaping)',
+            'projects.card3.desc': 'This corporate project combines minimalism and coziness. There are 5 floors for the same company, where we have a natural vertical garden with automatic irrigation in the outdoor area, many natural potted plants, trees and preserved aerial elements to compose all floors. Well-being is a priority there.',
+            'projects.card4.title': 'MDS',
+            'projects.card4.tag': '(Natural, permanent and preserved landscaping)',
+            'projects.card4.desc': 'There were 2 floors for the headquarters in Rio. With suitcases ready for its branches in São Paulo and Salvador. We will continue with the same identity where we alternate natural plants in pots, preserved in trees and planters and aerials with permanent plants. This was the mix chosen by the architects who signed this project.',
+            /* clients */
+            'clients.title': 'OUR CLIENTS'
+        },
+        'es': {
+            'nav.home': 'Inicio',
+            'nav.types': 'Tipos',
+            'nav.projects': 'Proyectos',
+            'nav.clients': 'Clientes',
+            'nav.contact': 'Contacto',
+            'hero.line1': 'Paisajismo moderno,',
+            'hero.line2': 'a tu manera.',
+            'hero.lead': 'Especializados en paisajismo (natural, permanente y preservado), garantizamos ambientes verdes y elegantes todo el año, sin necesidad de mantenimiento constante. Nuestro compromiso es proporcionar una experiencia de bienestar que se mantiene impecable en todas las estaciones.',
+            'cta.quote': 'SOLICITAR PRESUPUESTO',
+            'contact.title': 'Ponte en contacto',
+            'contact.subtitle': '¡Crea tu cambio con nosotros!',
+            'footer.copyright': '© 2025 Jardin Paisagismo. Todos los derechos reservados.'
+            ,
+            /* types */
+            'types.title': 'TIPOS DE PAISAJISMO',
+            'types.card1.title': 'NATURAL',
+            'types.card1.desc': 'En macetas, jardineras, plantado directamente en el suelo o paneles verticales. Lo que sea mejor para su entorno y la entrada de luz natural. Con riego automático.',
+            'types.card2.title': 'PERMANENTE',
+            'types.card2.desc': 'Perfecto para espacios que no reciben luz natural. En esos casos se utilizan plantas artificiales idénticas a las reales, lo que a menudo confunde al espectador. No requieren mantenimiento.',
+            'types.card3.title': 'PRESERVADO',
+            'types.card3.desc': 'Plantas naturales que se conservan y secan. Pasan por un proceso meticuloso. A menudo elegidas por quienes quieren un mantenimiento mínimo pero evitan alternativas plásticas.',
+            /* projects */
+            'projects.title': 'NUESTROS PROYECTOS',
+            'projects.card1.title': 'PRIO',
+            'projects.card1.tag': '(Paisajismo permanente)',
+            'projects.card1.desc': 'Desarrollamos para PRIO un paisajismo permanente que integra la naturaleza marina y la arquitectura de forma armoniosa, creando entornos acogedores, inspiradores e inesperados. El nuevo paisajismo valora las áreas comunes y los espacios sociales, promoviendo el bienestar, la comodidad y una experiencia sensorial única para los empleados. Debido a su éxito, ya hemos realizado más de 10 proyectos con el mismo cliente, que replica la identidad creada en todas sus oficinas y ferias.',
+            'projects.card2.title': 'CRISTO REDENTOR',
+            'projects.card2.tag': '(Paisajismo permanente)',
+            'projects.card2.desc': 'En asociación con el Grupo Coca-Cola, desarrollamos el proyecto de paisajismo para el Cristo Redentor, uno de los principales hitos del mundo y símbolo de Río de Janeiro. El trabajo fue diseñado para replicar la vegetación local, para lo cual recibimos una lista de todas las especies nativas. La presencia del paisajismo ayuda a crear un entorno más armonioso y acogedor, generando mucha repercusión mediática para los turistas.',
+            'projects.card3.title': 'BAT',
+            'projects.card3.tag': '(Paisajismo natural y preservado)',
+            'projects.card3.desc': 'Este proyecto corporativo combina minimalismo y confort. Hay 5 pisos para la misma empresa, donde tenemos un jardín vertical natural con riego automático en el área exterior, muchas plantas naturales en macetas, árboles y elementos aéreos preservados para componer todos los pisos. El bienestar es una prioridad allí.',
+            'projects.card4.title': 'MDS',
+            'projects.card4.tag': '(Paisajismo natural, permanente y preservado)',
+            'projects.card4.desc': 'Fueron 2 pisos para la sede en Río. Con las maletas listas para sus sucursales en São Paulo y Salvador. Continuaremos con la misma identidad donde alternamos plantas naturales en macetas, preservadas en árboles y jardineras y aéreos con plantas permanentes. Esta fue la combinación elegida por las arquitectas que firmaron este proyecto.',
+            /* clients */
+            'clients.title': 'NUESTROS CLIENTES'
+        }
+    };
+
+    function applyTranslations(lang) {
+        const els = document.querySelectorAll('[data-i18n]');
+        els.forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[lang] && translations[lang][key]) {
+                // Preserve inner HTML tags for long paragraphs if needed
+                if (el.tagName.toLowerCase() === 'p' || el.tagName.toLowerCase() === 'h2' || el.tagName.toLowerCase() === 'h3' || el.tagName.toLowerCase() === 'a' || el.tagName.toLowerCase() === 'h4') {
+                    el.innerText = translations[lang][key];
+                } else {
+                    el.textContent = translations[lang][key];
+                }
+            }
+        });
+
+        // Update active state on buttons
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+        });
+
+        localStorage.setItem('siteLang', lang);
+    }
+
+    // Wire up language buttons
+    const langButtons = document.querySelectorAll('.lang-btn');
+    langButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            applyTranslations(lang);
+        });
+    });
+
+    // Initialize language from localStorage or fallback to pt-BR
+    const initialLang = localStorage.getItem('siteLang') || 'pt-BR';
+    applyTranslations(initialLang);
 
     console.log('🌿 Jardim Paisagismo - Landing page carregada com sucesso!');
 });
