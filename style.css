@@ -43,6 +43,11 @@ body {
     overflow-x: hidden;
 }
 
+/* Enforce Poppins site-wide while keeping .holiday for the logo */
+body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, span {
+    font-family: var(--font-primary);
+}
+
 .container {
     max-width: 1200px;
     width: 90%;
@@ -160,6 +165,11 @@ body {
     font-weight: 700;
     letter-spacing: -1px;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.holiday {
+    /* reserved for the Holiday font - if Holiday is loaded it will override the Poppins */
+    font-family: 'Holiday', var(--font-primary);
 }
 
 .logo span {

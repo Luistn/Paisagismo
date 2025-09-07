@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function() {
             'nav.contact': 'Contato',
             'hero.line1': 'Paisagismo moderno,',
             'hero.line2': 'do seu jeito.',
-            'hero.lead': 'Especializados em paisagismo (natural, permanente e preservado), garantimos ambientes verdes e elegantes o ano todo, sem a necessidade de manutenções constantes. Nosso compromisso é proporcionar uma experiência de bem-estar, que se mantém impecável em todas as estações.',
+                    'hero.lead': 'Especializados em paisagismo (<b><i>natural, permanente e preservado</i></b>), garantimos ambientes verdes e elegantes o ano todo, sem a necessidade de manutenções constantes. Nosso compromisso é proporcionar uma experiência de <b><i>bem-estar</i></b>, que se mantém <b><i>impecável em todas as estações</i></b>.',
             'cta.quote': 'FAÇA UM ORÇAMENTO',
             'contact.title': 'Entre em contato',
             'contact.subtitle': 'Crie conosco a sua mudança!',
@@ -322,7 +322,7 @@ document.addEventListener('DOMContentLoaded', function() {
             'nav.contact': 'Contact',
             'hero.line1': 'Modern landscaping,',
             'hero.line2': 'your way.',
-            'hero.lead': 'Specialized in landscaping (natural, permanent and preserved), we ensure green and elegant environments all year round, without the need for constant maintenance. Our commitment is to provide a wellness experience that remains impeccable in every season.',
+                    'hero.lead': 'Specialized in landscaping (<b><i>natural, permanent and preserved</i></b>), we ensure green and elegant environments all year round, without the need for constant maintenance. Our commitment is to provide a <b><i>wellness</i></b> experience that remains impeccable in every season.',
             'cta.quote': 'GET A QUOTE',
             'contact.title': 'Get in touch',
             'contact.subtitle': 'Create your change with us!',
@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function() {
             'nav.contact': 'Contacto',
             'hero.line1': 'Paisajismo moderno,',
             'hero.line2': 'a tu manera.',
-            'hero.lead': 'Especializados en paisajismo (natural, permanente y preservado), garantizamos ambientes verdes y elegantes todo el año, sin necesidad de mantenimiento constante. Nuestro compromiso es proporcionar una experiencia de bienestar que se mantiene impecable en todas las estaciones.',
+                    'hero.lead': 'Especializados en paisajismo (<b><i>natural, permanente y preservado</i></b>), garantizamos ambientes verdes y elegantes todo el año, sin necesidad de mantenimiento constante. Nuestro compromiso es proporcionar una experiencia de <b><i>bienestar</i></b> que se mantiene impecable en todas las estaciones.',
             'cta.quote': 'SOLICITAR PRESUPUESTO',
             'contact.title': 'Ponte en contacto',
             'contact.subtitle': '¡Crea tu cambio con nosotros!',
@@ -399,11 +399,15 @@ document.addEventListener('DOMContentLoaded', function() {
         els.forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (translations[lang] && translations[lang][key]) {
-                // Preserve inner HTML tags for long paragraphs if needed
-                if (el.tagName.toLowerCase() === 'p' || el.tagName.toLowerCase() === 'h2' || el.tagName.toLowerCase() === 'h3' || el.tagName.toLowerCase() === 'a' || el.tagName.toLowerCase() === 'h4') {
-                    el.innerText = translations[lang][key];
+                const translated = translations[lang][key];
+                // If the translation contains HTML tags we need to set innerHTML to preserve formatting
+                if (/<\/?(b|i|strong|em|span)[^>]*>/i.test(translated)) {
+                    el.innerHTML = translated;
+                } else if (el.tagName.toLowerCase() === 'a' || el.tagName.toLowerCase() === 'h2' || el.tagName.toLowerCase() === 'h3' || el.tagName.toLowerCase() === 'h4') {
+                    el.textContent = translated;
                 } else {
-                    el.textContent = translations[lang][key];
+                    // default to innerText for paragraphs to preserve spacing
+                    el.innerText = translated;
                 }
             }
         });
