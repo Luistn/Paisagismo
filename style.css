@@ -216,6 +216,16 @@ body {
     white-space: nowrap;
 }
 
+/* Forçar a primeira frase em uma linha e a segunda em outra */
+.hero-text h2 .no-break,
+.hero-text h2 .second-line {
+    display: block;
+}
+
+.hero-text h2 .second-line {
+    margin-top: 6px;
+}
+
 /* Controle de quebra de linha responsivo */
 @media (max-width: 768px) {
     .hero-text h2 br {
@@ -796,7 +806,8 @@ body {
     }
     
     .hero {
-        padding: 100px 0 60px;
+    /* aumentar espaçamento superior para não colar no header fixo */
+    padding: 140px 0 60px;
     }
     
     /* nav-menu handled via fixed panel defined earlier; do not hide here */
@@ -843,7 +854,8 @@ body {
 
 @media (max-width: 480px) {
     .hero {
-        padding: 90px 0 50px;
+    /* mais espaço no topo em telas muito pequenas */
+    padding: 120px 0 50px;
         min-height: auto;
     }
     
