@@ -57,6 +57,63 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Menu active state (click) and simple scrollspy
+    function clearActiveMenu() {
+        document.querySelectorAll('.nav-menu a').forEach(a => a.classList.remove('active'));
+    }
+
+    document.querySelectorAll('.nav-menu a').forEach(a => {
+        a.addEventListener('click', function() {
+            clearActiveMenu();
+            this.classList.add('active');
+        });
+    });
+
+    // Robust scrollspy: compute visible section by bounds (accounts for overlap and page bottom)
+    const sections = Array.from(document.querySelectorAll('section[id]'));
+    let spyTicking = false;
+
+    function computeActiveSection() {
+        const headerHeight = document.querySelector('.header').offsetHeight || 0;
+        const viewportTop = window.pageYOffset + headerHeight + 1; // add 1px tolerance
+        const viewportBottom = window.pageYOffset + window.innerHeight;
+
+        // If we're at the bottom of the page, pick the last section
+        if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 2) {
+            return sections[sections.length - 1];
+        }
+
+        for (let sec of sections) {
+            const top = sec.offsetTop;
+            const bottom = top + sec.offsetHeight;
+            // If section intersects the viewport area below header, consider it active
+            if (bottom > viewportTop && top <= viewportBottom - headerHeight) {
+                return sec;
+            }
+        }
+
+        return null;
+    }
+
+    function onScrollSpy() {
+        if (spyTicking) return;
+        spyTicking = true;
+        window.requestAnimationFrame(() => {
+            const active = computeActiveSection();
+            if (active) {
+                clearActiveMenu();
+                const link = document.querySelector(`.nav-menu a[href="#${active.id}"]`);
+                if (link) link.classList.add('active');
+            }
+            spyTicking = false;
+        });
+    }
+
+    window.addEventListener('scroll', onScrollSpy, { passive: true });
+    window.addEventListener('resize', onScrollSpy);
+    // initialize active on load
+    onScrollSpy();
+
     // Header scroll effect
     const header = document.querySelector('.header');
     let lastScrollTop = 0;
@@ -99,13 +156,40 @@ document.addEventListener('DOMContentLoaded', function() {
     // Parallax effect for hero section
     const hero = document.querySelector('.hero');
     const heroImage = document.querySelector('.hero-image img');
-    
-    window.addEventListener('scroll', function() {
+
+    // Only enable parallax on wider screens to avoid mobile jank
+    const PARALLAX_MIN_WIDTH = 768;
+    let lastScrollY = 0;
+    let ticking = false;
+
+    function updateParallax() {
         const scrolled = window.pageYOffset;
         const rate = scrolled * -0.5;
-        
-        if (heroImage && scrolled < hero.offsetHeight) {
-            heroImage.style.transform = `translateY(${rate}px)`;
+        if (heroImage && hero) {
+            // limit transform when outside hero
+            if (scrolled < hero.offsetHeight) {
+                heroImage.style.transform = `translateY(${rate}px)`;
+            } else {
+                heroImage.style.transform = '';
+            }
+        }
+        ticking = false;
+    }
+
+    function onScrollParallax() {
+        if (window.innerWidth < PARALLAX_MIN_WIDTH) return; // disable on small screens
+        lastScrollY = window.pageYOffset;
+        if (!ticking) {
+            window.requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }
+
+    window.addEventListener('scroll', onScrollParallax, { passive: true });
+    window.addEventListener('resize', function() {
+        // reset transform on resize to small screens
+        if (window.innerWidth < PARALLAX_MIN_WIDTH && heroImage) {
+            heroImage.style.transform = '';
         }
     });
 

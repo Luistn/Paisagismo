@@ -196,32 +196,34 @@ body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, span {
     color: var(--white);
     font-weight: 600;
     font-size: 1rem;
-    transition: all 0.3s ease;
+    transition: all 0.18s ease;
     position: relative;
-    padding: 8px 12px;
-    border-radius: 4px;
-    background-color: rgba(0, 0, 0, 0.2);
+    padding: 8px 16px;
+    border-radius: 999px; /* pill */
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid transparent;
+    box-shadow: none;
 }
 
-.nav-menu a:hover {
-    color: var(--gold);
-    background-color: rgba(0, 0, 0, 0.4);
+.nav-menu a:hover,
+.nav-menu a:focus {
+    color: var(--primary-green);
+    background-color: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    outline: none;
 }
 
-.nav-menu a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
+/* Active/selected state */
+.nav-menu a.active {
     background: var(--gold);
-    transition: width 0.3s ease;
+    color: var(--primary-green);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.16);
+    transform: translateY(-2px);
 }
 
-.nav-menu a:hover::after {
-    width: 100%;
-}
+/* Small subtle underline removed for pill aesthetic */
+.nav-menu a::after { display: none; }
 
 /* Hero Section */
 .hero {
@@ -307,22 +309,45 @@ body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, span {
 .cta-button {
     background: var(--gold);
     color: var(--primary-green);
-    padding: 16px 32px;
+    padding: 14px 34px;
     border: none;
-    border-radius: var(--border-radius);
-    font-size: 1.1rem;
-    font-weight: 600;
+    border-radius: 999px; /* pill */
+    font-size: 1.05rem;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: var(--shadow-medium);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    box-shadow: 0 10px 30px rgba(176,135,102,0.12);
     text-transform: uppercase;
     letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cta-button .cta-icon {
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    color: var(--primary-green);
+}
+
+.cta-button .cta-text {
+    display: inline-block;
 }
 
 .cta-button:hover {
     background: #c59877;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-heavy);
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 14px 40px rgba(176,135,102,0.18);
+}
+
+.cta-button:active {
+    transform: translateY(0) scale(0.995);
+}
+
+.cta-button:focus {
+    outline: 3px solid rgba(255,255,255,0.12);
+    outline-offset: 3px;
 }
 
 .hero-image {
@@ -336,6 +361,13 @@ body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, span {
     border-radius: 20px;
     box-shadow: var(--shadow-heavy);
     transition: transform 0.3s ease;
+}
+
+/* Performance hint: help GPU compositing and avoid repaint jank on mobile */
+.hero-image img {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .hero-image:hover img {
@@ -641,13 +673,20 @@ body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, span {
 .contato {
     padding: var(--section-padding);
     background: var(--primary-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .contato-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: start;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: center;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 0;
 }
 
 .contato-info h3 {
@@ -669,7 +708,7 @@ body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, span {
 .contato-info p {
     font-size: 1.1rem;
     line-height: 1.7;
-    margin-bottom: 32px;
+    margin-bottom: 14px; /* reduzido para evitar espaçamento grande entre frases */
     color: var(--white);
     opacity: 0.9;
 }
@@ -741,6 +780,32 @@ body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, span {
     gap: 30px;
 }
 
+/* Compact footer layout when small credit is present */
+.footer-compact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer-left p,
+.footer-right p {
+    margin: 0;
+}
+
+.footer-right {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 480px) {
+    .footer-compact {
+        flex-direction: column-reverse;
+        gap: 6px;
+        text-align: center;
+    }
+}
+
 .footer-logo h1 {
     font-family: var(--font-primary);
     font-size: 2rem;
@@ -808,6 +873,23 @@ body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, span {
     color: var(--white);
     opacity: 0.8;
     margin-bottom: 2px;
+}
+
+.dev-credit-small {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.65);
+    margin-top: 6px;
+}
+
+.dev-credit-small .dev-credit-link {
+    color: var(--gold);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.dev-credit-small .dev-credit-link:hover {
+    color: #c59877;
+    text-decoration: underline;
 }
 
 .dev-credit {
@@ -907,18 +989,25 @@ body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, span {
     }
     
     .hero-text h2 {
-        font-size: 1.6rem;
+    font-size: 1.8rem; /* aumentado para melhor leitura no mobile */
         margin-bottom: 15px;
     }
     
     .hero-text p {
-        font-size: 1rem;
+    font-size: 1.05rem; /* leve aumento no parágrafo */
         margin-bottom: 25px;
     }
     
     .cta-button {
         padding: 12px 24px;
         font-size: 0.9rem;
+    }
+
+    /* full width CTA on very small screens for better tap target */
+    .hero-text .cta-button {
+        display: block;
+        width: 100%;
+        text-align: center;
     }
     
     .sobre-text h3, 
@@ -1009,11 +1098,11 @@ body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, span {
 
 @media (max-width: 360px) {
     .hero-text h2 {
-        font-size: 1.6rem;
+    font-size: 1.7rem;
     }
     
     .hero-text p {
-        font-size: 0.9rem;
+    font-size: 1rem;
     }
     
     .sobre-text h3, 
