@@ -538,3 +538,121 @@ window.addEventListener('load', function() {
     images.forEach(img => imageObserver.observe(img));
 });
 
+// --- Galeria por projeto: abrir modal com fotos específicas ---
+document.addEventListener('DOMContentLoaded', function() {
+    // Mapear imagens por projeto (usar nomes existentes na pasta images/)
+    const projectImages = {
+        'prio': [
+            'images/modern_landscaping_1.jpg',
+            'images/modern_landscaping_2.jpg',
+            'images/modern_landscaping_3.jpg'
+        ],
+        'cristo': [
+            'images/modern_landscaping_1.jpg',
+            'images/luxury_garden_1.jpg',
+            'images/indoor_vertical_garden_1.jpg'
+        ],
+        'bat': [
+            'images/luxury_garden_1.jpg',
+            'images/luxury_garden_2.jpg',
+            'images/modern_landscaping_3.jpg'
+        ],
+        'mds': [
+            'images/luxury_garden_2.jpg',
+            'images/modern_landscaping_2.jpg',
+            'images/indoor_vertical_garden_1.jpg'
+        ]
+    };
+
+    const modal = document.getElementById('project-modal');
+    const pmImage = modal && modal.querySelector('.pm-image');
+    const pmCaption = modal && modal.querySelector('.pm-caption');
+    const pmThumbs = modal && modal.querySelector('.pm-thumbs');
+
+    let currentGallery = [];
+    let currentIndex = 0;
+
+    function openProjectGallery(indexOrSlug) {
+        // accepts either numeric index (legacy) or slug key
+        if (typeof indexOrSlug === 'number') {
+            // fallback: pick gallery by order
+            const keys = Object.keys(projectImages);
+            const key = keys[indexOrSlug] || keys[0];
+            currentGallery = projectImages[key] || [];
+        } else {
+            currentGallery = projectImages[indexOrSlug] || [];
+        }
+        if (!modal || !pmImage) return;
+        populateThumbs();
+        setImage(0);
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeProjectGallery() {
+        if (!modal) return;
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    function setImage(i) {
+        if (!pmImage) return;
+        currentIndex = (i + currentGallery.length) % currentGallery.length;
+        pmImage.src = currentGallery[currentIndex];
+        pmImage.alt = '';
+        if (pmCaption) pmCaption.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
+        // update active thumb
+        if (pmThumbs) {
+            Array.from(pmThumbs.querySelectorAll('img')).forEach((t, idx) => {
+                t.classList.toggle('active', idx === currentIndex);
+            });
+            // ensure active thumb visible
+            const active = pmThumbs.querySelector('img.active');
+            if (active) active.scrollIntoView({ inline: 'center', behavior: 'smooth' });
+        }
+    }
+
+    function populateThumbs() {
+        if (!pmThumbs) return;
+        pmThumbs.innerHTML = '';
+        currentGallery.forEach((src, idx) => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = `Foto ${idx + 1}`;
+            img.addEventListener('click', () => setImage(idx));
+            pmThumbs.appendChild(img);
+        });
+    }
+
+    // Controls
+    document.addEventListener('click', function(e) {
+        const action = e.target.closest('[data-action]') && e.target.closest('[data-action]').getAttribute('data-action');
+        if (!action) return;
+        if (action === 'close') closeProjectGallery();
+        if (action === 'prev') setImage(currentIndex - 1);
+        if (action === 'next') setImage(currentIndex + 1);
+    });
+
+    // Open when clicking em projeto (usa data-gallery se presente)
+    const projetoCards = document.querySelectorAll('.projeto-card');
+    projetoCards.forEach((card, idx) => {
+        card.addEventListener('click', function(e) {
+            e.preventDefault();
+            const slug = card.getAttribute('data-gallery');
+            if (slug && projectImages[slug]) {
+                openProjectGallery(slug);
+            } else {
+                openProjectGallery(idx); // fallback por índice
+            }
+        });
+    });
+
+    // keyboard navigation
+    window.addEventListener('keydown', function(e) {
+        if (!modal || modal.getAttribute('aria-hidden') === 'true') return;
+        if (e.key === 'Escape') closeProjectGallery();
+        if (e.key === 'ArrowLeft') setImage(currentIndex - 1);
+        if (e.key === 'ArrowRight') setImage(currentIndex + 1);
+    });
+});
+

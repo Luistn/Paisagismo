@@ -131,7 +131,7 @@
         <div class="container">
             <h3 data-i18n="projects.title">NOSSOS PROJETOS</h3>
             <div class="projetos-grid">
-                <div class="projeto-card">
+                <div class="projeto-card" data-gallery="prio">
                     <img src="images/modern_landscaping_1.jpg" alt="Projeto 1">
                     <div class="projeto-info">
                         <h4 data-i18n="projects.card1.title">PRIO</h4>
@@ -139,7 +139,7 @@
                         <p data-i18n="projects.card1.desc">Desenvolvemos para a PRIO um paisagismo permanente que integra natureza do fundo do mar e arquitetura de forma harmoniosa, criando ambientes acolhedores, inspiradores e inusitados. O novo paisagismo valoriza áreas comuns e espaços de convivência, promovendo bem-estar, conforto e uma experiência sensorial única para os colaboradores. Devido ao sucesso, já passamos de 10 projetos com o mesmo cliente, que replica a identidade criada em todos os seus escritórios e feiras.</p>
                     </div>
                 </div>
-                <div class="projeto-card">
+                <div class="projeto-card" data-gallery="cristo">
                     <img src="images/luxury_garden_1.jpg" alt="Projeto 2">
                     <div class="projeto-info">
                         <h4 data-i18n="projects.card2.title">CRISTO REDENTOR</h4>
@@ -147,7 +147,7 @@
                         <p data-i18n="projects.card2.desc">Em parceria com o Grupo Coca-Cola, desenvolvemos o projeto de paisagismo para o Cristo Redentor, um dos principais cartões-postais do mundo e símbolo do Rio de Janeiro. O trabalho foi pensado para replicar a vegetação local, onde recebemos uma lista com todas as espécies nativas. A presença do paisagismo contribui para um ambiente mais harmonioso e convidativo, gerando muitas mídias para os turistas.</p>
                     </div>
                 </div>
-                <div class="projeto-card">
+                <div class="projeto-card" data-gallery="bat">
                     <img src="images/modern_landscaping_3.jpg" alt="Projeto 3">
                     <div class="projeto-info">
                         <h4 data-i18n="projects.card3.title">BAT</h4>
@@ -155,7 +155,7 @@
                         <p data-i18n="projects.card3.desc">Este projeto corporativo combina minimalismo e aconchego. São 5 andares para a mesma empresa, onde temos jardim vertical natural com irrigação automática na área externa, muitas plantas naturais em vaso, árvores e aéreos preservados para compor todos os andares. O bem-estar é prioridade ali.</p>
                     </div>
                 </div>
-                <div class="projeto-card">
+                <div class="projeto-card" data-gallery="mds">
                     <img src="images/luxury_garden_2.jpg" alt="Projeto 4">
                     <div class="projeto-info">
                         <h4 data-i18n="projects.card4.title">MDS</h4>
@@ -283,6 +283,23 @@
             </div>
         </div>
     </footer>
+
+</div>
+
+    <!-- Modal / Lightbox para projetos -->
+    <div id="project-modal" class="project-modal" aria-hidden="true">
+        <div class="pm-overlay" data-action="close"></div>
+        <div class="pm-window" role="dialog" aria-modal="true" aria-label="Galeria de projeto">
+            <button class="pm-close" data-action="close" aria-label="Fechar">×</button>
+            <button class="pm-prev" data-action="prev" aria-label="Anterior">❮</button>
+            <div class="pm-content">
+                <img src="" alt="" class="pm-image">
+                <p class="pm-caption"></p>
+            </div>
+            <button class="pm-next" data-action="next" aria-label="Próximo">❯</button>
+            <div class="pm-thumbs" aria-hidden="false"></div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
