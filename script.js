@@ -541,26 +541,27 @@ window.addEventListener('load', function() {
 // --- Galeria por projeto: abrir modal com fotos específicas ---
 document.addEventListener('DOMContentLoaded', function() {
     // Mapear imagens por projeto (usar nomes existentes na pasta images/)
+    // cada entrada é um array de objetos { src, caption }
     const projectImages = {
         'prio': [
-            'images/modern_landscaping_1.jpg',
-            'images/modern_landscaping_2.jpg',
-            'images/modern_landscaping_3.jpg'
+            { src: 'images/modern_landscaping_1.jpg', caption: 'PRIO - Área comum com paisagismo permanente' },
+            { src: 'images/modern_landscaping_2.jpg', caption: 'PRIO - Detalhe de jardim vertical' },
+            { src: 'images/modern_landscaping_3.jpg', caption: 'PRIO - Vista geral do projeto' }
         ],
         'cristo': [
-            'images/modern_landscaping_1.jpg',
-            'images/luxury_garden_1.jpg',
-            'images/indoor_vertical_garden_1.jpg'
+            { src: 'images/modern_landscaping_1.jpg', caption: 'Cristo - Integração com a arquitetura' },
+            { src: 'images/luxury_garden_1.jpg', caption: 'Cristo - Composição permanente' },
+            { src: 'images/indoor_vertical_garden_1.jpg', caption: 'Cristo - Painel vertical' }
         ],
         'bat': [
-            'images/luxury_garden_1.jpg',
-            'images/luxury_garden_2.jpg',
-            'images/modern_landscaping_3.jpg'
+            { src: 'images/luxury_garden_1.jpg', caption: 'BAT - Ambientes internos' },
+            { src: 'images/luxury_garden_2.jpg', caption: 'BAT - Jardins preservados' },
+            { src: 'images/modern_landscaping_3.jpg', caption: 'BAT - Entrada principal' }
         ],
         'mds': [
-            'images/luxury_garden_2.jpg',
-            'images/modern_landscaping_2.jpg',
-            'images/indoor_vertical_garden_1.jpg'
+            { src: 'images/luxury_garden_2.jpg', caption: 'MDS - Projetos por andar' },
+            { src: 'images/modern_landscaping_2.jpg', caption: 'MDS - Composição de vasos' },
+            { src: 'images/indoor_vertical_garden_1.jpg', caption: 'MDS - Detalhe do painel' }
         ]
     };
 
@@ -598,9 +599,19 @@ document.addEventListener('DOMContentLoaded', function() {
     function setImage(i) {
         if (!pmImage) return;
         currentIndex = (i + currentGallery.length) % currentGallery.length;
-        pmImage.src = currentGallery[currentIndex];
-        pmImage.alt = '';
-        if (pmCaption) pmCaption.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
+        const item = currentGallery[currentIndex];
+        // carregamento sob demanda: definir src apenas ao selecionar
+        pmImage.src = '';
+        pmImage.removeAttribute('alt');
+        // small fade trick
+        pmImage.style.opacity = '0';
+        setTimeout(() => {
+            pmImage.src = item.src;
+            pmImage.alt = item.caption || '';
+            pmImage.style.transition = 'opacity 220ms ease';
+            pmImage.style.opacity = '1';
+        }, 40);
+        if (pmCaption) pmCaption.textContent = item.caption || `${currentIndex + 1} / ${currentGallery.length}`;
         // update active thumb
         if (pmThumbs) {
             Array.from(pmThumbs.querySelectorAll('img')).forEach((t, idx) => {
@@ -615,10 +626,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function populateThumbs() {
         if (!pmThumbs) return;
         pmThumbs.innerHTML = '';
-        currentGallery.forEach((src, idx) => {
+        currentGallery.forEach((item, idx) => {
             const img = document.createElement('img');
-            img.src = src;
-            img.alt = `Foto ${idx + 1}`;
+            img.src = item.src;
+            img.alt = item.caption || `Foto ${idx + 1}`;
+            img.loading = 'lazy';
             img.addEventListener('click', () => setImage(idx));
             pmThumbs.appendChild(img);
         });
